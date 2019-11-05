@@ -1,0 +1,38 @@
+DROP TABLE IF EXISTS stores;
+
+CREATE TABLE stores (
+  id BIGINT AUTO_INCREMENT  PRIMARY KEY,
+  name VARCHAR(250) NOT NULL,
+  address VARCHAR(500) NOT NULL
+);
+
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE orders (
+  id BIGINT AUTO_INCREMENT  PRIMARY KEY,
+  store_id BIGINT NOT NULL,
+  address VARCHAR(250) NOT NULL,
+  confirmation_date TIMESTAMP NOT NULL,
+  status INT NOT NULL
+);
+
+DROP TABLE IF EXISTS order_itens;
+
+CREATE TABLE order_itens (
+  id BIGINT AUTO_INCREMENT  PRIMARY KEY,
+  order_id BIGINT NOT NULL,
+  description VARCHAR(500) NOT NULL,
+  unity_price REAL NOT NULL,
+  quantity INT NOT NULL
+);
+
+
+DROP TABLE IF EXISTS payments;
+
+CREATE TABLE payments (
+  id BIGINT AUTO_INCREMENT  PRIMARY KEY,
+  order_id BIGINT NOT NULL,
+  status INT NOT NULL,
+  credit_card_number VARCHAR(16) NOT NULL,
+  payment_date TIMESTAMP NOT NULL
+);
