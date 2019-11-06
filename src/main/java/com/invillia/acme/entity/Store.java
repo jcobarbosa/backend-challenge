@@ -1,6 +1,7 @@
 package com.invillia.acme.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +11,11 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "O Nome da Empresa é obrigaótio.")
     private String name;
+
+    @NotNull(message = "O Endereço da empresa é obrigatório.")
     private String address;
 
     public Long getId() {

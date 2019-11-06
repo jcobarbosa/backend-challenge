@@ -31,11 +31,15 @@ public class StoreService {
 
     public StoreDTO create(StoreDTO storeDto) {
         Store store = ObjectMapperUtil.convert(storeDto, Store.class);
-        return ObjectMapperUtil.convert(storeRepository.save(store), StoreDTO.class);
+        return saveOrUpdate(store);
     }
 
     public StoreDTO update(StoreDTO storeDto) {
         Store store = ObjectMapperUtil.convert(storeDto, Store.class);
-        return ObjectMapperUtil.convert(storeRepository.save(store), StoreDTO.class);
+        return saveOrUpdate(store);
+    }
+
+    private StoreDTO saveOrUpdate(Store storeToPersist) {
+        return ObjectMapperUtil.convert(storeRepository.save(storeToPersist), StoreDTO.class);
     }
 }

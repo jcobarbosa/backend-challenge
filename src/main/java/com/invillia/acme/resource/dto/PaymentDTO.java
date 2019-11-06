@@ -1,22 +1,19 @@
-package com.invillia.acme.entity;
+package com.invillia.acme.resource.dto;
 
 import com.invillia.acme.entity.domain.PaymentStatus;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-@Entity
-@Table(name = "payments")
-public class Payment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PaymentDTO implements Serializable {
     private Long id;
-    private PaymentStatus status;
-    @Column(precision = 14)
+    private PaymentStatus status = PaymentStatus.RECEIVED;
+    @ApiModelProperty(notes = "Número do Cartão de Crédito - campo obrigatório")
+    @Size(min = 14, max = 14, message = "Números de Cartão de Crédito devem conter 14 dígitos")
     private String creditCardNumber;
-    private LocalDateTime paymentDate;
+    private LocalDateTime paymentDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
@@ -48,18 +45,5 @@ public class Payment {
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Payment payment = (Payment) o;
-        return Objects.equals(id, payment.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

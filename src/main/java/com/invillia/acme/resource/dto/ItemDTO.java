@@ -1,19 +1,18 @@
-package com.invillia.acme.entity;
+package com.invillia.acme.resource.dto;
 
-import javax.persistence.*;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
 
-@Entity
-@Table(name = "orders_itens")
-public class Item {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ItemDTO implements Serializable {
     private Long id;
 
+    @ApiModelProperty(notes = "Descrição do item - campo obrigatório")
     private String description;
+    @ApiModelProperty(notes = "Valor unitário - campo obrigatório")
     private BigDecimal unityPrice;
+    @ApiModelProperty(notes = "Quantidade - campo obrigatório")
     private Integer quantity;
 
     public Long getId() {
@@ -46,18 +45,5 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(id, item.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

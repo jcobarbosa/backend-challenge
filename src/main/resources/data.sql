@@ -13,14 +13,15 @@ CREATE TABLE orders (
   store_id BIGINT NOT NULL,
   address VARCHAR(250) NOT NULL,
   confirmation_date TIMESTAMP NOT NULL,
-  status INT NOT NULL
+  status INT NOT NULL,
+  payment_id BIGINT
 );
 
-DROP TABLE IF EXISTS order_itens;
+DROP TABLE IF EXISTS orders_itens;
 
-CREATE TABLE order_itens (
+CREATE TABLE orders_itens (
   id BIGINT AUTO_INCREMENT  PRIMARY KEY,
-  order_id BIGINT NOT NULL,
+  order_id BIGINT,
   description VARCHAR(500) NOT NULL,
   unity_price REAL NOT NULL,
   quantity INT NOT NULL
@@ -31,7 +32,6 @@ DROP TABLE IF EXISTS payments;
 
 CREATE TABLE payments (
   id BIGINT AUTO_INCREMENT  PRIMARY KEY,
-  order_id BIGINT NOT NULL,
   status INT NOT NULL,
   credit_card_number VARCHAR(16) NOT NULL,
   payment_date TIMESTAMP NOT NULL

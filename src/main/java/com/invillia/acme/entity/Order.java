@@ -1,7 +1,10 @@
 package com.invillia.acme.entity;
 
+import com.invillia.acme.entity.domain.OrderStatus;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +20,16 @@ public class Order {
     private Store store;
     private String address;
     private LocalDateTime confirmationDate;
-    private int status;
+    @Enumerated(EnumType.ORDINAL)
+    private OrderStatus status;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_id")
+    private List<Item> itens;
 
     public Long getId() {
         return id;
@@ -51,12 +63,28 @@ public class Order {
         this.store = store;
     }
 
-    public int getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
