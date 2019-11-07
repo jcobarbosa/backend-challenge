@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/order")
+@RequestMapping(path = "/api/order")
 public class OrderResource {
 
     private OrderService orderService;
